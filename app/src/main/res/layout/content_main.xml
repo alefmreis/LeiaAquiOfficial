@@ -2,61 +2,61 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
 
     <Button
-        android:id="@+id/buttonLivrosCRUD"
-        android:layout_width="174dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="110dp"
-        android:text="Livros"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/buttonLeitoresCRUD"
+        style="@android:style/Widget.Holo.Button"
         android:layout_width="174dp"
         android:layout_height="78dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="110dp"
-        android:text="Leitores"
+        android:layout_marginTop="40dp"
+        android:text="@string/leitores"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLivrosCRUD" />
 
     <Button
-        android:id="@+id/buttonCategoriaLeitoresCRUD"
+        android:id="@+id/buttonLivrosCRUD"
+        style="@android:style/Widget.Holo.Button"
         android:layout_width="174dp"
         android:layout_height="78dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginEnd="110dp"
-        android:text="Categoria de Leitores"
+        android:layout_marginTop="20dp"
+        android:text="@string/livros"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCategoriaLeitoresCRUD"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="174dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/cat_leitores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCategoriaLivrosCRUD" />
 
     <Button
         android:id="@+id/buttonCategoriaLivrosCRUD"
+        style="@android:style/Widget.Holo.Button"
         android:layout_width="174dp"
         android:layout_height="78dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="110dp"
-        android:text="Categoria de Livros"
+        android:layout_marginTop="40dp"
+        android:text="@string/cat_livros"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLeitoresCRUD" />
 
