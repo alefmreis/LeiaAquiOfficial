@@ -3,6 +3,8 @@ package br.com.leiaaqui;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 public class LivroController {
     private SQLiteDatabase db;
@@ -41,6 +43,19 @@ public class LivroController {
             return "Registro inserido com sucesso";
         }
 
+    }
+
+
+    public Cursor carregaDadosLivros(){
+        Cursor cursor;
+        String[] campos = {DatabaseManager.getIdLivros(),DatabaseManager.getTituloLivros()};
+        db = banco.getReadableDatabase();
+        cursor = db.query(DatabaseManager.getTabelaLivros(), campos, null, null, null, null, null, null);
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }
+        db.close();
+        return cursor;
     }
 
 
