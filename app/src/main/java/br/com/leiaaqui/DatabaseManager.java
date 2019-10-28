@@ -36,8 +36,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String NR_EMPRESTIMO_CATEGORIA_LIVROS = "nr_maximo_emprestimo";
     private static final String TAXA_MULTA_CATEGORIA_LIVROS = "taxa_multa";
 
-    private static final String TABELA_CATEGORIA_LEITORES= "categoria_leitores";
-    private static final String ID_CATEGORIA_LEITORES= "_id";
+    private static final String TABELA_CATEGORIA_LEITORES = "categoria_leitores";
+    private static final String ID_CATEGORIA_LEITORES = "_id";
     private static final String DESCRICAO_CATEGORIA_LEITORES = "descricao";
     private static final String NR_EMPRESTIMO_CATEGORIA_LEITORES = "nr_maximo_emprestimo";
 
@@ -46,6 +46,89 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public DatabaseManager(Context context) {
         super(context, getNomeBanco(), null, VERSAO);
     }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        this.criarTabelaLivros(db);
+        this.criarTabelaClientes(db);
+        this.criarTabelaCategoriaLeitores(db);
+        this.criarTabelaCategoriaLivros(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + getTabelaClientes());
+        db.execSQL("DROP TABLE IF EXISTS " + getTabelaLivros());
+        db.execSQL("DROP TABLE IF EXISTS " + getTabelaCategoriaLivros());
+        db.execSQL("DROP TABLE IF EXISTS " + getTabelaCategoriaLeitores());
+        this.onCreate(db);
+    }
+
+    public void criarTabelaLivros(SQLiteDatabase db) {
+
+        String command = "CREATE TABLE " + getTabelaLivros() + " (" +
+                getIdLivros() + " integer primary key autoincrement," +
+                getIsbnLivros() + " integer," +
+                getTituloLivros() + " text," +
+                getCodCategoriaLivros() + " integer," +
+                getAutorLivros() + " text," +
+                getPalavrasChaveLivros() + " text," +
+                getDtPublicacaoLivros() + " DATETIME," +
+                getNrEdicaoLivros() + " integer," +
+                getEditoraLivros() + " text," +
+                getNrPaginasLivros() + " integer" +
+                ")";
+
+        db.execSQL(command);
+
+        /*String commandInsert = "INSERT INTO "+getTabelaLivros()+" VALUES (" +
+                " 1," +
+                " 12345," +
+                " 'teste'," +
+                " 1," +
+                " 'tester'," +
+                " 'test,teste'," +
+                " '2019-10-23'," +
+                " 1," +
+                " 'teste livros'," +
+                " 1" +
+                ")";
+
+        db.execSQL(commandInsert);*/
+    }
+
+    public void criarTabelaClientes(SQLiteDatabase db) {
+        String command = "CREATE TABLE " + getTabelaClientes() + " (" +
+                getIdClientes() + " integer primary key autoincrement," +
+                getNomeClientes() + " text," +
+                getEnderecoClientes() + " text," +
+                getCelularClientes() + " text," +
+                getEmailClientes() + " text unique," +
+                getCpfClientes() + " text unique," +
+                getDtNascimentoClientes() + " DATETIME" +
+                ")";
+        db.execSQL(command);
+    }
+
+    public void criarTabelaCategoriaLivros(SQLiteDatabase db) {
+        String command = "CREATE TABLE " + getTabelaCategoriaLivros() + " (" +
+                getIdCategoriaLivros() + " integer primary key autoincrement," +
+                getDescricaoCategoriaLivros() + " text," +
+                getNrEmprestimoCategoriaLivros() + " number," +
+                getTaxaMultaCategoriaLivros() + " REAL" +
+                ")";
+        db.execSQL(command);
+    }
+
+    public void criarTabelaCategoriaLeitores(SQLiteDatabase db) {
+        String command = "CREATE TABLE " + getTabelaCategoriaLeitores() + " (" +
+                getIdCategoriaLeitores() + " integer primary key autoincrement," +
+                getDescricaoCategoriaLeitores() + " text," +
+                getNrEmprestimoCategoriaLeitores() + " integer" +
+                ")";
+        db.execSQL(command);
+    }
+
 
     public static String getNomeBanco() {
         return NOME_BANCO;
@@ -162,87 +245,5 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public static String getNrEmprestimoCategoriaLeitores() {
         return NR_EMPRESTIMO_CATEGORIA_LEITORES;
     }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        this.criarTabelaLivros(db);
-        this.criarTabelaClientes(db);
-        this.criarTabelaCategoriaLeitores(db);
-        this.criarTabelaCategoriaLivros(db);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+getTabelaClientes());
-        db.execSQL("DROP TABLE IF EXISTS "+getTabelaLivros());
-        db.execSQL("DROP TABLE IF EXISTS "+getTabelaCategoriaLivros());
-        db.execSQL("DROP TABLE IF EXISTS "+getTabelaCategoriaLeitores());
-        this.onCreate(db);
-    }
-
-    public void criarTabelaLivros(SQLiteDatabase db) {
-        String command = "CREATE TABLE "+getTabelaLivros()+" (" +
-                getIdLivros()+" integer primary key autoincrement," +
-                getIsbnLivros()+" integer," +
-                getTituloLivros()+" text," +
-                getCodCategoriaLivros()+" integer," +
-                getAutorLivros()+" text," +
-                getPalavrasChaveLivros()+" text," +
-                getDtPublicacaoLivros()+" DATETIME," +
-                getNrEdicaoLivros()+" integer," +
-                getEditoraLivros()+" text," +
-                getNrPaginasLivros()+" integer" +
-                ")";
-
-        db.execSQL(command);
-
-        /*String commandInsert = "INSERT INTO "+getTabelaLivros()+" VALUES (" +
-                " 1," +
-                " 12345," +
-                " 'teste'," +
-                " 1," +
-                " 'tester'," +
-                " 'test,teste'," +
-                " '2019-10-23'," +
-                " 1," +
-                " 'teste livros'," +
-                " 1" +
-                ")";
-
-        db.execSQL(commandInsert);*/
-    }
-
-    public void criarTabelaClientes(SQLiteDatabase db) {
-        String command = "CREATE TABLE "+getTabelaClientes()+" (" +
-                getIdClientes()+" integer primary key autoincrement," +
-                getNomeClientes()+" text," +
-                getEnderecoClientes()+" text," +
-                getCelularClientes()+" text," +
-                getEmailClientes()+" text unique," +
-                getCpfClientes()+" text unique," +
-                getDtNascimentoClientes()+" DATETIME" +
-                ")";
-        db.execSQL(command);
-    }
-
-    public void criarTabelaCategoriaLivros(SQLiteDatabase db) {
-        String command = "CREATE TABLE "+getTabelaCategoriaLivros()+" (" +
-                getIdCategoriaLivros()+" integer primary key autoincrement," +
-                getDescricaoCategoriaLivros()+" text," +
-                getNrEmprestimoCategoriaLivros()+" number," +
-                getTaxaMultaCategoriaLivros()+" REAL" +
-                ")";
-        db.execSQL(command);
-    }
-
-    public void criarTabelaCategoriaLeitores(SQLiteDatabase db) {
-        String command = "CREATE TABLE "+getTabelaCategoriaLeitores()+" (" +
-                getIdCategoriaLeitores()+" integer primary key autoincrement," +
-                getDescricaoCategoriaLeitores()+" text," +
-                getNrEmprestimoCategoriaLeitores()+" integer" +
-                ")";
-        db.execSQL(command);
-    }
-
 
 }

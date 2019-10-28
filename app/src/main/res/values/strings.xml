@@ -11,4 +11,5 @@
     <string name="cat_livros">Categoria de Livros</string>
     <string name="cat_leitores">Categoria de Leitores</string>
     <string name="title_activity_categoria_cliente_consulta">Categoria Leitores</string>
+    <string name="title_activity_categoria_cliente_inserir">Categoria Leitores</string>
 </resources>
