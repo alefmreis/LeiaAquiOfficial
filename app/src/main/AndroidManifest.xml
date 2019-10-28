@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".CategoriaClienteAtualiza"
+            android:label="@string/title_activity_categoria_cliente_atualiza"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".CategoriaClienteInserir"
             android:label="@string/title_activity_categoria_cliente_inserir"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CategoriaClienteConsulta"
             android:label="@string/title_activity_categoria_cliente_consulta"

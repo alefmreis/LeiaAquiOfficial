@@ -3,9 +3,6 @@ package br.com.leiaaqui;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.widget.AdapterView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,29 +12,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 
-public class CategoriaClienteConsulta extends AppCompatActivity
+public class CategoriaClienteAtualiza extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView lista;
+    EditText descricao;
+    EditText numeroDias;
+    CategoriaClienteController crud;
+    String codigo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categoria_cliente_consulta);
+        setContentView(R.layout.activity_categoria_cliente_atualiza);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CategoriaClienteConsulta.this, CategoriaClienteInserir.class);
-                startActivity(intent);
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,32 +39,56 @@ public class CategoriaClienteConsulta extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        CategoriaClienteController banco = new CategoriaClienteController(getBaseContext());
-        final Cursor cursor = banco.list();
+        codigo = this.getIntent().getStringExtra("codigo");
+        crud = new CategoriaClienteController(getBaseContext());
 
-        String[] campos = new String[]{DatabaseManager.getDescricaoCategoriaLeitores(),
-                DatabaseManager.getNrEmprestimoCategoriaLeitores()};
+        descricao = (EditText) findViewById(R.id.des);
+        numeroDias = (EditText) findViewById((R.id.atualizaEmprestimoDiasLeitor));
 
-        int[] idViews = new int[]{R.id.diasEmprestimoCategoriaLeitor, R.id.descricaoCategoriaLeitorConsulta};
-        SimpleCursorAdapter adaptador = new SimpleCursorAdapter(getBaseContext(),
-                R.layout.content_categoria_cliente_consulta, cursor, campos, idViews, 0
-        );
+        Button alterar = (Button) findViewById(R.id.buttonAltererCategoriaLeitor);
 
-        lista = (ListView) findViewById(R.id.listView1);
-        lista.setAdapter(adaptador);
+        Cursor cursor = crud.findOne(Integer.parseInt(codigo));
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        descricao.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getDescricaoCategoriaLeitores())));
+        numeroDias.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getNrEmprestimoCategoriaLeitores())));
+
+
+        alterar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String codigo;
-                cursor.moveToPosition(position);
-                codigo = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseManager.getIdCategoriaLeitores()));
-                Intent intent = new Intent(CategoriaClienteConsulta.this, CategoriaClienteAtualiza.class);
-                intent.putExtra("codigo", codigo);
+            public void onClick(View v) {
+                crud.update(Integer.parseInt(codigo), descricao.getText().toString(),
+                        Integer.parseInt(numeroDias.getText().toString()));
+
+                Intent intent = new Intent(CategoriaClienteAtualiza.this, CategoriaClienteConsulta.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+        Button deletar = (Button)findViewById(R.id.button3);
+
+        deletar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crud.delete(Integer.parseInt(codigo));
+                Intent intent = new Intent(CategoriaClienteAtualiza.this, CategoriaClienteConsulta.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        Button cancelar = (Button)findViewById(R.id.button2);
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoriaClienteAtualiza.this, CategoriaClienteConsulta.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 
     @Override
