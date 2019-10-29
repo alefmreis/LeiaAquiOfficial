@@ -16,7 +16,7 @@
     <string name="title_activity_categoria_cliente_consulta">Categoria Leitores</string>
     <string name="title_activity_categoria_cliente_inserir">Categoria Leitores</string>
     <string name="title_activity_categoria_cliente_atualiza">Categoria Leitores</string>
-    <string name="title_activity_cliente_consulta">ClienteConsulta</string>
-    <string name="title_activity_cliente_atualiza">ClienteAtualiza</string>
-    <string name="title_activity_cliente_inserir">ClienteInserir</string>
+    <string name="title_activity_cliente_consulta">Leitores</string>
+    <string name="title_activity_cliente_atualiza">Leitores</string>
+    <string name="title_activity_cliente_inserir">Leitores</string>
 </resources>

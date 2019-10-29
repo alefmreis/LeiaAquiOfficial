@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CategoriaClienteConsulta.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -49,6 +50,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CategoriaLivroConsulta.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        Button buttonCliente = (Button) findViewById(R.id.buttonLeitoresCRUD);
+        buttonCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ClienteConsulta.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
