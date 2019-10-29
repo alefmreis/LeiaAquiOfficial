@@ -65,7 +65,7 @@ public class CategoriaClienteAtualiza extends AppCompatActivity
             }
         });
 
-        Button deletar = (Button)findViewById(R.id.button3);
+        Button deletar = (Button) findViewById(R.id.button3);
 
         deletar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +77,7 @@ public class CategoriaClienteAtualiza extends AppCompatActivity
             }
         });
 
-        Button cancelar = (Button)findViewById(R.id.button2);
+        Button cancelar = (Button) findViewById(R.id.button2);
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,11 +130,14 @@ public class CategoriaClienteAtualiza extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_cadastro) {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        } else if (id == R.id.nav_consulta) {
-
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -41,8 +41,8 @@ public class CategoriaClienteInserir extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 CategoriaClienteController crud = new CategoriaClienteController(getBaseContext());
-                EditText descricao = (EditText)findViewById(R.id.descricaoCategoriaLeitor);
-                EditText numeroDias = (EditText)findViewById((R.id.emprestimoCategoriaCliente));
+                EditText descricao = (EditText) findViewById(R.id.descricaoCategoriaLeitor);
+                EditText numeroDias = (EditText) findViewById((R.id.emprestimoCategoriaCliente));
 
                 String categoriaDescricao = descricao.getText().toString();
                 int emprestimoDias = Integer.parseInt(numeroDias.getText().toString());
@@ -96,11 +96,9 @@ public class CategoriaClienteInserir extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_cadastro) {
-
-        } else if (id == R.id.nav_consulta) {
-
+            Intent intent = new Intent(CategoriaClienteInserir.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

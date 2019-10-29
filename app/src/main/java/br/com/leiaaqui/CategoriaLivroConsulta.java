@@ -114,11 +114,9 @@ public class CategoriaLivroConsulta extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_cadastro) {
-
-        } else if (id == R.id.nav_consulta) {
-
+            Intent intent = new Intent(CategoriaLivroConsulta.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

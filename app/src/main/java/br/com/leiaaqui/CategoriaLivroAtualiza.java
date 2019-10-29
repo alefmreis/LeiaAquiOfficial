@@ -60,7 +60,7 @@ public class CategoriaLivroAtualiza extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 crud.update(Integer.parseInt(codigo), descricao.getText().toString(),
-                        Integer.parseInt(numeroDias.getText().toString()),Double.parseDouble(txMulta.getText().toString()) );
+                        Integer.parseInt(numeroDias.getText().toString()), Double.parseDouble(txMulta.getText().toString()));
 
                 Intent intent = new Intent(CategoriaLivroAtualiza.this, CategoriaLivroConsulta.class);
                 startActivity(intent);
@@ -68,7 +68,7 @@ public class CategoriaLivroAtualiza extends AppCompatActivity
             }
         });
 
-        Button deletar = (Button)findViewById(R.id.button3);
+        Button deletar = (Button) findViewById(R.id.button3);
 
         deletar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class CategoriaLivroAtualiza extends AppCompatActivity
             }
         });
 
-        Button cancelar = (Button)findViewById(R.id.button2);
+        Button cancelar = (Button) findViewById(R.id.button2);
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,11 +133,9 @@ public class CategoriaLivroAtualiza extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_cadastro) {
-
-        } else if (id == R.id.nav_consulta) {
-
+            Intent intent = new Intent(CategoriaLivroAtualiza.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
