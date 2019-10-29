@@ -10,9 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ClienteInserir"
+            android:label="@string/title_activity_cliente_inserir"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ClienteAtualiza"
+            android:label="@string/title_activity_cliente_atualiza"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ClienteConsulta"
+            android:label="@string/title_activity_cliente_consulta"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".CategoriaClienteAtualiza"
             android:label="@string/title_activity_categoria_cliente_atualiza"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CategoriaClienteInserir"
             android:label="@string/title_activity_categoria_cliente_inserir"
@@ -24,7 +36,7 @@
         <activity
             android:name=".CategoriaLivroAtualiza"
             android:label="@string/title_activity_categoria_livros_atualiza"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CategoriaLivroInserir"
             android:label="@string/title_activity_categoria_livros_inserir"
