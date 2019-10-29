@@ -95,16 +95,13 @@ public class CategoriaLivroInserir extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        String id = item.toString();
 
-        if (id == R.id.home) {
-            Intent intent = new Intent(CategoriaLivroInserir.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        Intent intent = new Intent(CategoriaLivroInserir.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+
         return true;
     }
 }
