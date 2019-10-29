@@ -1,8 +1,8 @@
 package br.com.leiaaqui;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,17 +11,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
-
-public class MainActivity extends AppCompatActivity
+public class CategoriaLivroAtualiza extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    EditText descricao;
+    EditText numeroDias;
+    EditText txMulta;
+    CategoriaLivroController crud;
+    String codigo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_categoria_livro_atualiza);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,23 +40,58 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button buttonCategoriCliente = (Button) findViewById(R.id.buttonCategoriaLeitoresCRUD);
-        buttonCategoriCliente.setOnClickListener(new View.OnClickListener() {
+        codigo = this.getIntent().getStringExtra("codigo");
+        crud = new CategoriaLivroController(getBaseContext());
+
+        descricao = (EditText) findViewById(R.id.des);
+        numeroDias = (EditText) findViewById((R.id.atualizaEmprestimoDiasLivro));
+        txMulta = (EditText) findViewById((R.id.atualizaTaxaMultaLivro));
+
+        Button alterar = (Button) findViewById(R.id.buttonAltererCategoriaLivro);
+
+        Cursor cursor = crud.findOne(Integer.parseInt(codigo));
+
+        descricao.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getDescricaoCategoriaLivros())));
+        numeroDias.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getNrEmprestimoCategoriaLivros())));
+        txMulta.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getTaxaMultaCategoriaLivros())));
+
+
+        alterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CategoriaClienteConsulta.class);
+                crud.update(Integer.parseInt(codigo), descricao.getText().toString(),
+                        Integer.parseInt(numeroDias.getText().toString()),Double.parseDouble(txMulta.getText().toString()) );
+
+                Intent intent = new Intent(CategoriaLivroAtualiza.this, CategoriaLivroConsulta.class);
                 startActivity(intent);
+                finish();
             }
         });
 
-        Button buttonCategoriaLivro = (Button) findViewById(R.id.buttonCategoriaLivrosCRUD);
-        buttonCategoriaLivro.setOnClickListener(new View.OnClickListener() {
+        Button deletar = (Button)findViewById(R.id.button3);
+
+        deletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CategoriaLivroConsulta.class);
+                crud.delete(Integer.parseInt(codigo));
+                Intent intent = new Intent(CategoriaLivroAtualiza.this, CategoriaLivroConsulta.class);
                 startActivity(intent);
+                finish();
             }
         });
+
+        Button cancelar = (Button)findViewById(R.id.button2);
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoriaLivroAtualiza.this, CategoriaLivroConsulta.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 
     @Override
@@ -66,7 +107,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.categoria_cliente_consulta, menu);
         return true;
     }
 
@@ -92,9 +133,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            // Handle the camera action
         } else if (id == R.id.nav_cadastro) {
 
         } else if (id == R.id.nav_consulta) {

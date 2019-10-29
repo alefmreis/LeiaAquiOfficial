@@ -2,6 +2,8 @@ package br.com.leiaaqui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,16 +14,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-
-public class MainActivity extends AppCompatActivity
+public class CategoriaLivroInserir extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_categoria_livro_inserir);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,20 +36,24 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button buttonCategoriCliente = (Button) findViewById(R.id.buttonCategoriaLeitoresCRUD);
-        buttonCategoriCliente.setOnClickListener(new View.OnClickListener() {
+        Button criarCategoria = (Button) findViewById(R.id.buttonCriarCategoriaLivro);
+        criarCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CategoriaClienteConsulta.class);
-                startActivity(intent);
-            }
-        });
+                CategoriaLivroController crud = new CategoriaLivroController(getBaseContext());
+                EditText descricao = (EditText)findViewById(R.id.descricaoCategoriaLivro);
+                EditText numeroDias = (EditText)findViewById((R.id.emprestimoCategoriaLivro));
+                EditText txMulta = (EditText)findViewById((R.id.txMultaCategoriaLivro));
 
-        Button buttonCategoriaLivro = (Button) findViewById(R.id.buttonCategoriaLivrosCRUD);
-        buttonCategoriaLivro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CategoriaLivroConsulta.class);
+                String categoriaDescricao = descricao.getText().toString();
+                int emprestimoDias = Integer.parseInt(numeroDias.getText().toString());
+                double txMultaLivro = Double.parseDouble(txMulta.getText().toString());
+
+                String resultado = crud.insert(categoriaDescricao, emprestimoDias, txMultaLivro);
+
+                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(CategoriaLivroInserir.this, CategoriaLivroConsulta.class);
                 startActivity(intent);
             }
         });
@@ -66,7 +72,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.categoria_cliente_consulta, menu);
         return true;
     }
 
@@ -92,9 +98,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            // Handle the camera action
         } else if (id == R.id.nav_cadastro) {
 
         } else if (id == R.id.nav_consulta) {

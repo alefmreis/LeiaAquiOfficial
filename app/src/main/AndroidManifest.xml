@@ -21,6 +21,18 @@
             android:name=".CategoriaClienteConsulta"
             android:label="@string/title_activity_categoria_cliente_consulta"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CategoriaLivroAtualiza"
+            android:label="@string/title_activity_categoria_livros_atualiza"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".CategoriaLivroInserir"
+            android:label="@string/title_activity_categoria_livros_inserir"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CategoriaLivroConsulta"
+            android:label="@string/title_activity_categoria_livros_consulta"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LivrosActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">

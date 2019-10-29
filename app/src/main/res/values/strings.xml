@@ -9,6 +9,9 @@
     <string name="livros">Livros</string>
     <string name="leitores">Leitores</string>
     <string name="cat_livros">Categoria de Livros</string>
+    <string name="title_activity_categoria_livros_consulta">Categoria Livros</string>
+    <string name="title_activity_categoria_livros_inserir">Categoria Livros</string>
+    <string name="title_activity_categoria_livros_atualiza">Categoria Livros</string>
     <string name="cat_leitores">Categoria de Leitores</string>
     <string name="title_activity_categoria_cliente_consulta">Categoria Leitores</string>
     <string name="title_activity_categoria_cliente_inserir">Categoria Leitores</string>
