@@ -82,7 +82,7 @@ public class CategoriaClienteInserir extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == 'a') {
             return true;
         }
 
