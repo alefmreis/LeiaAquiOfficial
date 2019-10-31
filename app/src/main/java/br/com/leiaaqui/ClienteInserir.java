@@ -13,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class ClienteInserir extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +35,38 @@ public class ClienteInserir extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Button criarClienteButton = (Button) findViewById(R.id.button);
+        criarClienteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClienteController crud = new ClienteController(getBaseContext());
+
+                EditText nome = (EditText) findViewById(R.id.nomeCliente);
+                EditText email = (EditText) findViewById((R.id.emailCliente));
+                EditText dataNascimento = (EditText) findViewById(R.id.editText7);
+                EditText phone = (EditText) findViewById(R.id.phoneCliente);
+                EditText cpf = (EditText) findViewById(R.id.editText3);
+                EditText endereco = (EditText) findViewById(R.id.editText2);
+
+                String nomeCliente = nome.getText().toString();
+                String emailCliente = email.getText().toString();
+                String dataNascimentoCliente = dataNascimento.getText().toString();
+                String phoneCliente = phone.getText().toString();
+                String cpfCliente = cpf.getText().toString();
+                String enderecoCliente = endereco.getText().toString();
+
+                String resultado = crud.insert(nomeCliente, enderecoCliente, phoneCliente,
+                        emailCliente, cpfCliente, dataNascimentoCliente, "1");
+
+                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(ClienteInserir.this, ClienteConsulta.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
     }
 
     @Override

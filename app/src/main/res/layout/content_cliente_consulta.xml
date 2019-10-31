@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_cliente_consulta">
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="false"
@@ -31,7 +31,7 @@
 
 
         <EditText
-            android:id="@+id/nomeCliente"
+            android:id="@+id/nomeClienteConsulta"
             android:layout_width="135dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -43,7 +43,7 @@
             tools:layout_editor_absoluteY="16dp" />
 
         <EditText
-            android:id="@+id/emailClinte"
+            android:id="@+id/emailClinteConsulta"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -52,7 +52,6 @@
             android:inputType="textEmailAddress"
             tools:layout_editor_absoluteX="176dp"
             tools:layout_editor_absoluteY="215dp" />
-
     </GridLayout>
 
 </android.support.constraint.ConstraintLayout>

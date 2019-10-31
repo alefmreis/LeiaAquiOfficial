@@ -29,7 +29,7 @@ public class ClienteController {
         values.put(DatabaseManager.getEmailClientes(), email);
         values.put(DatabaseManager.getCpfClientes(), cpf);
         values.put(DatabaseManager.getDtNascimentoClientes(), dataNascimento);
-        values.put(DatabaseManager.getCodCategoriaLeitores(), categoriaCliente);
+//        values.put(DatabaseManager.getCodCategoriaLeitores(), categoriaCliente);
 
         resultado = db.insert("clientes", null, values);
         db.close();

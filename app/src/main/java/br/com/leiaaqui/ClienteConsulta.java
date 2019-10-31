@@ -1,6 +1,7 @@
 package br.com.leiaaqui;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,9 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 public class ClienteConsulta extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,21 @@ public class ClienteConsulta extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ClienteController banco = new ClienteController(getBaseContext());
+        final Cursor cursor = banco.list();
+
+        String [] campos = { DatabaseManager.getNomeClientes(), DatabaseManager.getEmailClientes(),};
+
+        int[] idViews = new int[]{R.id.nomeClienteConsulta, R.id.emailClinteConsulta};
+
+        SimpleCursorAdapter adaptador = new SimpleCursorAdapter(getBaseContext(),
+                R.layout.content_cliente_consulta, cursor, campos, idViews, 0
+        );
+
+        lista = (ListView) findViewById(R.id.listView2);
+        lista.setAdapter(adaptador);
+
     }
 
     @Override

@@ -53,6 +53,7 @@ public class CategoriaClienteInserir extends AppCompatActivity
 
                 Intent intent = new Intent(CategoriaClienteInserir.this, CategoriaClienteConsulta.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
