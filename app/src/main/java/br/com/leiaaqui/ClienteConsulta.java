@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -61,6 +62,19 @@ public class ClienteConsulta extends AppCompatActivity
 
         lista = (ListView) findViewById(R.id.listView2);
         lista.setAdapter(adaptador);
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String codigo;
+                cursor.moveToPosition(position);
+                codigo = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseManager.getIdClientes()));
+                Intent intent = new Intent(ClienteConsulta.this, ClienteAtualiza.class);
+                intent.putExtra("codigo", codigo);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

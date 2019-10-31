@@ -13,9 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class ClienteAtualiza extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ClienteController crud;
+    String codigo;
+    EditText nome;
+    EditText email;
+    EditText dataNascimento;
+    EditText phone;
+    EditText cpf;
+    EditText endereco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,17 @@ public class ClienteAtualiza extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        codigo = this.getIntent().getStringExtra("codigo");
+        crud = new ClienteController(getBaseContext());
+
+        nome = (EditText)findViewById(R.id.nomeClienteAtualiza);
+        email = (EditText) findViewById(R.id.emailClienteAtualiza);
+        phone = (EditText) findViewById(R.id.phoneClienteAtualiza);
+        dataNascimento = (EditText)findViewById(R.id.editText7Atualiza);
+        cpf = (EditText) findViewById(R.id.editText3Atualiza);
+        endereco = (EditText) findViewById(R.id.editText2Atualiza);
+
     }
 
     @Override
