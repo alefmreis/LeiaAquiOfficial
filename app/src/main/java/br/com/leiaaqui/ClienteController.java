@@ -23,13 +23,13 @@ public class ClienteController {
         db = banco.getWritableDatabase();
         values = new ContentValues();
 
-        values.put("nome", nome);
-        values.put("endereco", endereco);
-        values.put("celular", celular);
-        values.put("email", email);
-        values.put("cpf", cpf);
-        values.put("data_nascimento", dataNascimento);
-        values.put("codigo_categoria", categoriaCliente);
+        values.put(DatabaseManager.getNomeClientes(), nome);
+        values.put(DatabaseManager.getEnderecoClientes(), endereco);
+        values.put(DatabaseManager.getCelularClientes(), celular);
+        values.put(DatabaseManager.getEmailClientes(), email);
+        values.put(DatabaseManager.getCpfClientes(), cpf);
+        values.put(DatabaseManager.getDtNascimentoClientes(), dataNascimento);
+        values.put(DatabaseManager.getCodCategoriaLeitores(), categoriaCliente);
 
         resultado = db.insert("clientes", null, values);
         db.close();

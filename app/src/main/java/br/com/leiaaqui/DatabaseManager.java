@@ -28,6 +28,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String CELULAR_CLIENTES = "celular";
     private static final String EMAIL_CLIENTES = "email";
     private static final String CPF_CLIENTES = "cpf";
+    private static final String COD_CATEGORIA_LEITORES = "cod_categoria";
     private static final String DT_NASCIMENTO_CLIENTES = "dt_nascimento";
 
     private static final String TABELA_CATEGORIA_LIVROS = "categoria_livros";
@@ -106,6 +107,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 getEmailClientes() + " text unique," +
                 getCpfClientes() + " text unique," +
                 getDtNascimentoClientes() + " DATETIME" +
+                getCodCategoriaLeitores() + " text" +
                 ")";
         db.execSQL(command);
     }
@@ -244,6 +246,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public static String getNrEmprestimoCategoriaLeitores() {
         return NR_EMPRESTIMO_CATEGORIA_LEITORES;
+    }
+
+    public static String getCodCategoriaLeitores() {
+        return COD_CATEGORIA_LEITORES;
     }
 
 }
