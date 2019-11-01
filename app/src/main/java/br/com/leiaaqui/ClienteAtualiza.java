@@ -1,7 +1,9 @@
 package br.com.leiaaqui;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class ClienteAtualiza extends AppCompatActivity
@@ -46,12 +49,59 @@ public class ClienteAtualiza extends AppCompatActivity
         codigo = this.getIntent().getStringExtra("codigo");
         crud = new ClienteController(getBaseContext());
 
-        nome = (EditText)findViewById(R.id.nomeClienteAtualiza);
+        nome = (EditText) findViewById(R.id.nom);
         email = (EditText) findViewById(R.id.emailClienteAtualiza);
-        phone = (EditText) findViewById(R.id.phoneClienteAtualiza);
-        dataNascimento = (EditText)findViewById(R.id.editText7Atualiza);
-        cpf = (EditText) findViewById(R.id.editText3Atualiza);
-        endereco = (EditText) findViewById(R.id.editText2Atualiza);
+        phone = (EditText) findViewById(R.id.telefoneClienteAtualiza);
+        dataNascimento = (EditText) findViewById(R.id.dataNascimentoClienteAtualiza);
+        cpf = (EditText) findViewById(R.id.cpfClienteAtualiza);
+        endereco = (EditText) findViewById(R.id.enderecoClienteAtualiza);
+
+        Cursor cursor = crud.findOne(Integer.parseInt(codigo));
+
+        nome.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getNomeClientes())));
+        email.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getEmailClientes())));
+        phone.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getCelularClientes())));
+        dataNascimento.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getDtNascimentoClientes())));
+        cpf.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getCpfClientes())));
+        endereco.setText(cursor.getString(cursor.getColumnIndex(DatabaseManager.getEnderecoClientes())));
+
+        Button alterar = (Button) findViewById(R.id.button5) ;
+
+        alterar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crud.update(Integer.parseInt(codigo), nome.getText().toString(), endereco.getText().toString(),
+                        phone.getText().toString(), dataNascimento.getText().toString(),"1"
+                        );
+
+                Intent intent = new Intent(ClienteAtualiza.this, ClienteConsulta.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        Button deletar = (Button) findViewById(R.id.button7);
+
+        deletar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crud.delete(Integer.parseInt(codigo));
+                Intent intent = new Intent(ClienteAtualiza.this, ClienteConsulta.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        Button cancelar = (Button) findViewById(R.id.button6);
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ClienteAtualiza.this, ClienteConsulta.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

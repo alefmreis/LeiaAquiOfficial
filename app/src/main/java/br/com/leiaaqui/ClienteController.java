@@ -82,8 +82,8 @@ public class ClienteController {
         return cursor;
     }
 
-    public void update(int id, String nome, String endereco, String celular, String email,
-                       String cpf, String dataNascimento, String categoriaCliente) {
+    public void update(int id, String nome, String endereco, String celular
+            , String dataNascimento, String categoriaCliente) {
 
         ContentValues valores;
 
@@ -96,15 +96,13 @@ public class ClienteController {
         valores.put(DatabaseManager.getNomeClientes(), nome);
         valores.put(DatabaseManager.getEnderecoClientes(), endereco);
         valores.put(DatabaseManager.getCelularClientes(), celular);
-        valores.put(DatabaseManager.getEmailClientes(), email);
-        valores.put(DatabaseManager.getCpfClientes(), cpf);
         valores.put(DatabaseManager.getDtNascimentoClientes(), dataNascimento);
 
         db.update(DatabaseManager.getTabelaClientes(), valores, condition, null);
         db.close();
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         String condition = DatabaseManager.getIdClientes() + "=" + id;
         db = banco.getReadableDatabase();
         db.delete(DatabaseManager.getTabelaClientes(), condition, null);
