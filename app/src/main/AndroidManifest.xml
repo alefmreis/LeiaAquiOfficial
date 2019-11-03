@@ -61,14 +61,6 @@
             android:name=".LivroAtualiza"
             android:label="@string/title_activity_livros_atualiza"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".LivroInserir"
-            android:label="@string/title_activity_livros_inserir"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".LivroConsulta"
-            android:label="@string/title_activity_livros_consulta"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LivrosActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
