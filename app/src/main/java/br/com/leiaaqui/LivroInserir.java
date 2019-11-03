@@ -3,6 +3,7 @@ package br.com.leiaaqui;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,7 +37,6 @@ public class LivroInserir extends AppCompatActivity
         codCategoria = (Spinner) findViewById((R.id.spinnerCatLivros));
         codCategoria.setOnItemSelectedListener(this);
         loadCategoriasLivros();
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -155,4 +154,5 @@ public class LivroInserir extends AppCompatActivity
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 }

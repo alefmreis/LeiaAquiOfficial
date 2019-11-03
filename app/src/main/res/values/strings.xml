@@ -22,4 +22,7 @@
     <string name="title_activity_cliente_consulta">Leitores</string>
     <string name="title_activity_cliente_atualiza">Leitores</string>
     <string name="title_activity_cliente_inserir">Leitores</string>
+    <string name="title_activity_livro_consulta">Livros</string>
+    <string name="title_activity_livro_inserir">Livros</string>
+    <string name="title_activity_livro_atualizar">Livros</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -35,6 +35,7 @@ public class LivroConsulta extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(LivroConsulta.this, LivroInserir.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -122,9 +123,5 @@ public class LivroConsulta extends AppCompatActivity
         finish();
         return true;
 
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
     }
 }
