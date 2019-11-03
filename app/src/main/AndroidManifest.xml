@@ -10,9 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".LivroAtualizar"
+            android:label="@string/title_activity_livro_atualizar"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".LivroInserir"
+            android:label="@string/title_activity_livro_inserir"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LivroConsulta"
+            android:label="@string/title_activity_livro_consulta"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ClienteInserir"
             android:label="@string/title_activity_cliente_inserir"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ClienteAtualiza"
             android:label="@string/title_activity_cliente_atualiza"
