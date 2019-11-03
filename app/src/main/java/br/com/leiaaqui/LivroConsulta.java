@@ -17,7 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class CategoriaLivroConsulta extends AppCompatActivity
+public class LivroConsulta extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView lista;
@@ -25,7 +25,7 @@ public class CategoriaLivroConsulta extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categoria_livro_consulta);
+        setContentView(R.layout.activity_livro_consulta);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -33,7 +33,7 @@ public class CategoriaLivroConsulta extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CategoriaLivroConsulta.this, CategoriaLivroInserir.class);
+                Intent intent = new Intent(LivroConsulta.this, LivroInserir.class);
                 startActivity(intent);
             }
         });
@@ -47,15 +47,19 @@ public class CategoriaLivroConsulta extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        CategoriaLivroController banco = new CategoriaLivroController(getBaseContext());
+        LivroController banco = new LivroController(getBaseContext());
         final Cursor cursor = banco.list();
 
-        String[] campos = new String[]{DatabaseManager.getDescricaoCategoriaLivros(),
-                DatabaseManager.getNrEmprestimoCategoriaLivros(), DatabaseManager.getTaxaMultaCategoriaLivros()};
+        String[] campos = new String[]{DatabaseManager.getIsbnLivros(),DatabaseManager.getTituloLivros(),
+                DatabaseManager.getDescricaoCategoriaLivros(),DatabaseManager.getAutorLivros(),
+                DatabaseManager.getPalavrasChaveLivros(),DatabaseManager.getDtPublicacaoLivros(),
+                DatabaseManager.getNrEdicaoLivros(),DatabaseManager.getEditoraLivros(),DatabaseManager.getNrPaginasLivros()};
 
-        int[] idViews = new int[]{R.id.diasEmprestimoCategoriaLivro, R.id.descricaoCategoriaLivroConsulta, R.id.txMultaCategoriaLivro};
+        int[] idViews = new int[]{R.id.ISBNValue, R.id.TituloValue, R.id.CatLivroValue,
+                R.id.AutorValue, R.id.PCValue, R.id.DtPublicacaoValue,
+                R.id.NrEdicaoValue, R.id.EditoraValue, R.id.NrPagsValue};
         SimpleCursorAdapter adaptador = new SimpleCursorAdapter(getBaseContext(),
-                R.layout.content_categoria_livro_consulta, cursor, campos, idViews, 0
+                R.layout.content_livro_consulta, cursor, campos, idViews, 0
         );
 
         lista = (ListView) findViewById(R.id.listView1);
@@ -67,7 +71,7 @@ public class CategoriaLivroConsulta extends AppCompatActivity
                 String codigo;
                 cursor.moveToPosition(position);
                 codigo = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseManager.getIdCategoriaLivros()));
-                Intent intent = new Intent(CategoriaLivroConsulta.this, CategoriaLivroAtualiza.class);
+                Intent intent = new Intent(LivroConsulta.this, LivroAtualiza.class);
                 intent.putExtra("codigo", codigo);
                 startActivity(intent);
                 finish();
@@ -88,7 +92,7 @@ public class CategoriaLivroConsulta extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.categoria_livro_consulta, menu);
+        getMenuInflater().inflate(R.menu.livro_consulta, menu);
         return true;
     }
 
@@ -113,7 +117,7 @@ public class CategoriaLivroConsulta extends AppCompatActivity
         // Handle navigation view item clicks here.
         String id = item.toString();
 
-        Intent intent = new Intent(CategoriaLivroConsulta.this, MainActivity.class);
+        Intent intent = new Intent(LivroConsulta.this, MainActivity.class);
         startActivity(intent);
         finish();
         return true;

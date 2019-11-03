@@ -12,6 +12,9 @@
     <string name="title_activity_categoria_livros_consulta">Categoria Livros</string>
     <string name="title_activity_categoria_livros_inserir">Categoria Livros</string>
     <string name="title_activity_categoria_livros_atualiza">Categoria Livros</string>
+    <string name="title_activity_livros_consulta">Livros</string>
+    <string name="title_activity_livros_inserir">Livros</string>
+    <string name="title_activity_livros_atualiza">Livros</string>
     <string name="cat_leitores">Categoria de Leitores</string>
     <string name="title_activity_categoria_cliente_consulta">Categoria Leitores</string>
     <string name="title_activity_categoria_cliente_inserir">Categoria Leitores</string>

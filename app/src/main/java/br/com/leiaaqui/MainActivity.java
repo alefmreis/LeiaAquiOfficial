@@ -63,6 +63,16 @@ public class MainActivity extends AppCompatActivity
                 finish();
             }
         });
+
+        Button buttonLivros = (Button) findViewById(R.id.buttonLivrosCRUD);
+        buttonLivros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LivroConsulta.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

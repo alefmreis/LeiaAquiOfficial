@@ -107,7 +107,7 @@ public class CategoriaLivroAtualiza extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.categoria_cliente_consulta, menu);
+        getMenuInflater().inflate(R.menu.categoria_livro_consulta, menu);
         return true;
     }
 
