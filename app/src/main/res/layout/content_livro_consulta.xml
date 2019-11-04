@@ -126,7 +126,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:visibility="visible"
-            android:text="Nr. Edicao: "/>
+            android:text="Nr. Edição: "/>
         <TextView
             android:id="@+id/NrEdicaoValue"
             android:layout_width="110dp"
