@@ -63,7 +63,7 @@ public class LivroConsulta extends AppCompatActivity
                 R.layout.content_livro_consulta, cursor, campos, idViews, 0
         );
 
-        lista = (ListView) findViewById(R.id.listView1);
+        lista = (ListView) findViewById(R.id.listView5);
         lista.setAdapter(adaptador);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
