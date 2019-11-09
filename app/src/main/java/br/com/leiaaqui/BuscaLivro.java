@@ -2,7 +2,6 @@ package br.com.leiaaqui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,17 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+public class BuscaLivro extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String KEY_INFO_TEXTO = "KEY_INFO_TEXTO";
+    public static final String KEY_INFO_TIPO = "KEY_INFO_TIPO";
+    EditText tituloLivro;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_busca_livro_inserir);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,46 +42,33 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button buttonCategoriCliente = (Button) findViewById(R.id.buttonCategoriaLeitoresCRUD);
-        buttonCategoriCliente.setOnClickListener(new View.OnClickListener() {
+        spinner = (Spinner) findViewById(R.id.spinnerBusca);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.tipos_busca, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        tituloLivro = (EditText) findViewById((R.id.descricaoBusca));
+
+        Button buscaLivro = (Button) findViewById(R.id.buttonBusca);
+        buscaLivro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CategoriaClienteConsulta.class);
-                startActivity(intent);
-                finish();
+                // Criar um Bundle (agrupamento) - Estrutura para tráfego de dados:
+                Bundle bundleInf= new Bundle();
+                String tipoBuscaTxt = spinner.getSelectedItem().toString();
+                String msg = tituloLivro.getText().toString();
+
+                bundleInf.putString(KEY_INFO_TEXTO, msg);
+                bundleInf.putString(KEY_INFO_TIPO, tipoBuscaTxt);
+
+                Intent it = new Intent(BuscaLivro.this, LivroConsulta.class);
+                it.putExtras(bundleInf);
+                startActivity(it);
             }
         });
 
-        Button buttonCategoriaLivro = (Button) findViewById(R.id.buttonCategoriaLivrosCRUD);
-        buttonCategoriaLivro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CategoriaLivroConsulta.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        Button buttonCliente = (Button) findViewById(R.id.buttonLeitoresCRUD);
-        buttonCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ClienteConsulta.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        Button buttonLivros = (Button) findViewById(R.id.buttonLivrosCRUD);
-        buttonLivros.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BuscaLivro.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     @Override
@@ -89,7 +84,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.categoria_cliente_consulta, menu);
         return true;
     }
 
@@ -112,16 +107,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        String id = item.toString();
 
-        if (id == R.id.home) {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        Intent intent = new Intent(BuscaLivro.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+
         return true;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

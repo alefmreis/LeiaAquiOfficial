@@ -21,6 +21,8 @@ public class LivroConsulta extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView lista;
+    private String tipo;
+    private String txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,15 @@ public class LivroConsulta extends AppCompatActivity
         setContentView(R.layout.activity_livro_consulta);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Obter dados da Activity que chamou esta:
+        // Recuperar Intent passado:
+        Intent intentRecebida = getIntent();
+        // Recuperar Bundle vinculado ao Intent:
+        Bundle bundle = intentRecebida.getExtras();
+        // Recuperar texto do Bundle:
+        tipo = bundle.getString(BuscaLivro.KEY_INFO_TIPO).toString();
+        txt = bundle.getString(BuscaLivro.KEY_INFO_TEXTO).toString();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +60,7 @@ public class LivroConsulta extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         LivroController banco = new LivroController(getBaseContext());
-        final Cursor cursor = banco.list();
+        final Cursor cursor = banco.list(tipo,txt);
 
         String[] campos = new String[]{DatabaseManager.getIsbnLivros(),DatabaseManager.getTituloLivros(),
                 DatabaseManager.getDescricaoCategoriaLivros(),DatabaseManager.getAutorLivros(),

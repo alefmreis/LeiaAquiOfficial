@@ -93,7 +93,7 @@ public class LivroAtualiza extends AppCompatActivity
                         dtPublic.getText().toString(), Integer.parseInt(nrEdicao.getText().toString()),
                         editoraLivro.getText().toString(), Integer.parseInt(nrPags.getText().toString()));
 
-                Intent intent = new Intent(LivroAtualiza.this, LivroConsulta.class);
+                Intent intent = new Intent(LivroAtualiza.this, BuscaLivro.class);
                 startActivity(intent);
                 finish();
             }
@@ -105,7 +105,7 @@ public class LivroAtualiza extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 crud.delete(Integer.parseInt(codigo));
-                Intent intent = new Intent(LivroAtualiza.this, LivroConsulta.class);
+                Intent intent = new Intent(LivroAtualiza.this, BuscaLivro.class);
                 startActivity(intent);
                 finish();
             }
@@ -116,7 +116,7 @@ public class LivroAtualiza extends AppCompatActivity
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LivroAtualiza.this, LivroConsulta.class);
+                Intent intent = new Intent(LivroAtualiza.this, BuscaLivro.class);
                 startActivity(intent);
                 finish();
             }

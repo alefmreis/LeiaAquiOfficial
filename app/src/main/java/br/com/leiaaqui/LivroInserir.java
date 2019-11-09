@@ -77,7 +77,16 @@ public class LivroInserir extends AppCompatActivity
 
                 Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(LivroInserir.this, LivroConsulta.class);
+                Intent intent = new Intent(LivroInserir.this, BuscaLivro.class);
+                startActivity(intent);
+            }
+        });
+
+        Button cancelaLivro = (Button) findViewById(R.id.buttonCancelaLivro);
+        cancelaLivro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LivroInserir.this, BuscaLivro.class);
                 startActivity(intent);
             }
         });

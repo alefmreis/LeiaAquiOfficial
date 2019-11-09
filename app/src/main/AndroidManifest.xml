@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".BuscaLivro"
+            android:label="@string/title_activity_busca_livro_inserir"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".LivroAtualizar"
             android:label="@string/title_activity_livro_atualizar"
             android:theme="@style/AppTheme.NoActionBar"></activity>

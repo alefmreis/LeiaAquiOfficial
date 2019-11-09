@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,7 +52,7 @@ public class LivroController {
     }
 
 
-    public Cursor list() {
+    public Cursor list(String tipo, String texto) {
         Cursor cursor;
 
         /*String selectQuery = "SELECT  l."+ DatabaseManager.getIdLivros() +"," +
@@ -79,15 +80,39 @@ public class LivroController {
         LivrosProjection.put(DatabaseManager.getEditoraLivros(), DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getEditoraLivros());
         LivrosProjection.put(DatabaseManager.getNrPaginasLivros(), DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getNrPaginasLivros());
 
+        String groupBy = DatabaseManager.getTabelaCategoriaLivros()+"."+DatabaseManager.getDescricaoCategoriaLivros();
+
         SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
         _QB.setTables(DatabaseManager.getTabelaLivros() +
                 " LEFT JOIN " +DatabaseManager.getTabelaCategoriaLivros() +
                 " ON "+DatabaseManager.getTabelaLivros()+"." + DatabaseManager.getCodCategoriaLivros() +
                 " = "+DatabaseManager.getTabelaCategoriaLivros()+"."+ DatabaseManager.getIdCategoriaLivros());
-        _QB.setProjectionMap(LivrosProjection);
 
+        _QB.setProjectionMap(LivrosProjection);
+        Log.d("CREATE",tipo);
         SQLiteDatabase _DB = banco.getReadableDatabase();
-        Cursor _Result = _QB.query(_DB, null, null, null, null, null, null);
+        Cursor _Result = _QB.query(_DB, null, null, null, groupBy, null, null);
+        if(tipo.equals("Titulo")) {
+            Log.d("CREATE", tipo);
+            _QB.appendWhere(DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getTituloLivros()
+                    + " like '%" + texto + "%'");
+            _Result = _QB.query(_DB, null, DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getTituloLivros()
+                    + " like '%" + texto + "%'", null, groupBy, null, null);
+        } else if(tipo.equals("Autor")) {
+            _QB.appendWhere(DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getAutorLivros()
+                    + " like '%" + texto + "%'");
+            _Result = _QB.query(_DB, null, DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getAutorLivros()
+                    + " like '%" + texto + "%'", null, groupBy, null, null);
+        } else if(tipo.equals("Editora")) {
+            _QB.appendWhere(DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getEditoraLivros()
+                    + " like '%" + texto + "%'");
+            _Result = _QB.query(_DB, null, DatabaseManager.getTabelaLivros()+"."+DatabaseManager.getEditoraLivros()
+                    + " like '%" + texto + "%'", null, groupBy, null, null);
+        } else {
+            _Result = _QB.query(_DB, null, null, null, groupBy, null, null);
+        }
+
+
 
         /*String[] campos = {banco.getIdLivros(),banco.getIsbnLivros(),banco.getTituloLivros(),banco.getDescricaoCategoriaLivros(),
                 banco.getAutorLivros(), banco.getPalavrasChaveLivros(),banco.getDtPublicacaoLivros(),

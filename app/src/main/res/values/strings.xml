@@ -12,6 +12,7 @@
     <string name="title_activity_categoria_livros_consulta">Categoria Livros</string>
     <string name="title_activity_categoria_livros_inserir">Categoria Livros</string>
     <string name="title_activity_categoria_livros_atualiza">Categoria Livros</string>
+    <string name="title_activity_busca_livro_inserir">Busca Livro</string>
     <string name="title_activity_livros_consulta">Livros</string>
     <string name="title_activity_livros_inserir">Livros</string>
     <string name="title_activity_livros_atualiza">Livros</string>
@@ -25,4 +26,10 @@
     <string name="title_activity_livro_consulta">Livros</string>
     <string name="title_activity_livro_inserir">Livros</string>
     <string name="title_activity_livro_atualizar">Livros</string>
+
+    <string-array name="tipos_busca">
+        <item>Titulo </item>
+        <item>Autor</item>
+        <item>Editora</item>
+    </string-array>
 </resources>
